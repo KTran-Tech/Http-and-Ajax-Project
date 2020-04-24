@@ -11,7 +11,8 @@ import './Blog.css';
 class Blog extends Component {
 
     state = {
-        posts: []
+        posts: [],
+        selectedPostId: null
     }
 
 
@@ -45,6 +46,15 @@ class Blog extends Component {
             });
            
     }
+
+
+
+
+    postSelectedHandler = (id) => {
+        this.setState({
+            selectedPostId: id
+        });
+    }
 //-------------------------------------------------------------------------------//    
 
 
@@ -56,6 +66,8 @@ class Blog extends Component {
                     key={post.id} 
                     title={post.title}
                     author={post.author}
+                    //everytime you pass an argument you use arrow function
+                    clicked={() => this.postSelectedHandler(post.id)}
                     />
         });
 
@@ -67,7 +79,7 @@ class Blog extends Component {
                 </section>
 
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.selectedPostId}/>
                 </section>
 
                 <section>
