@@ -22,7 +22,7 @@ class NewPost extends Component {
         }
         /* .post() will take in an argument data and replace its collected 
         data with your data passed in*/
-        axios.post('https://jsonplaceholder.typicode.com/posts', data)
+        axios.post('/posts', data)
             .then(response => {
                 console.log(response);
             });

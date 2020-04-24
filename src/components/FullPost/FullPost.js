@@ -21,7 +21,7 @@ class FullPost extends Component {
 
             /* specifying which object to grab from an array and output
             ONLY that object by adding the props.id at the end*/
-            axios.get('https://jsonplaceholder.typicode.com/posts/'+this.props.id)
+            axios.get('/posts/'+this.props.id)
             .then(response => {
             /*Because of the id specification from the .get(), you go
             from this,
@@ -36,7 +36,7 @@ class FullPost extends Component {
 
     deletePostHandler = () => {
         //delete an object with that specific id
-        axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.id)
+        axios.delete('/posts/'+this.props.id)
             .then(response => {
                 console.log(response);
             })

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // axios is necessary to work with promises(usually an Object with LOTS of data)
-import axios from 'axios';
+// import axios from 'axios';
+
+import axios from '../../axios'
 
 
 import Post from '../../components/Post/Post';
@@ -22,7 +24,7 @@ class Blog extends Component {
     componentDidMount(){
         //axios works WITH promises and .get() RETURNS a promise(an object with data)
     /* A promise may be in one of 3 possible states: fulfilled, rejected, or pending.*/
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts')
             .then(response => {
                 //Limit to 4 post only
                 const posts = response.data.slice(0,4);
