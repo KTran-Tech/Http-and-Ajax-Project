@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// axios is necessary to work with promises(usually an Object with LOTS of data)
+import axios from 'axios'
+
 import './NewPost.css';
 
 class NewPost extends Component {
@@ -8,6 +11,24 @@ class NewPost extends Component {
         content: '',
         author: 'Max'
     }
+
+//----------------------------------------------------------------//
+
+    postDataHandler = () => {
+        const data = {
+            title: this.state.title,
+            body: this.state.content,
+            author: this.state.author
+        }
+        /* .post() will take in an argument data and replace its collected 
+        data with your data passed in*/
+        axios.post('https://jsonplaceholder.typicode.com/posts', data)
+            .then(response => {
+                console.log(response);
+            });
+    }
+
+//----------------------------------------------------------------//
 
     render () {
         return (
@@ -22,10 +43,12 @@ class NewPost extends Component {
                     <option value="Max">Max</option>
                     <option value="Manu">Manu</option>
                 </select>
-                <button>Add Post</button>
+                <button onClick={this.postDataHandler}>Add Post</button>
             </div>
         );
     }
 }
 
 export default NewPost;
+
+

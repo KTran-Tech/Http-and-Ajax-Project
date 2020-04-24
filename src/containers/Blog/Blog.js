@@ -12,7 +12,8 @@ class Blog extends Component {
 
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     }
 
 
@@ -43,6 +44,9 @@ class Blog extends Component {
                     posts: updatedPosts
                 });
                 // console.log(response);
+            })
+            .catch(error => {
+                this.setState({error: true});
             });
            
     }
@@ -59,9 +63,14 @@ class Blog extends Component {
 
 
     render () {
+        
+        let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>
+
+        if(!this.state.error){
+
         /*For every OBJECT that exist within this array, loop throuh them
         individually, one by one, and access their id, title, ect*/
-        const posts = this.state.posts.map(post => {
+         posts = this.state.posts.map(post => {
             return <Post 
                     key={post.id} 
                     title={post.title}
@@ -70,6 +79,7 @@ class Blog extends Component {
                     clicked={() => this.postSelectedHandler(post.id)}
                     />
         });
+        }
 
         return (
             <div>
