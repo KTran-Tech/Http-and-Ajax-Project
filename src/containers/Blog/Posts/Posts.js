@@ -13,7 +13,6 @@ class Posts extends Component {
     state = {
         posts: []
     }
-
 //-------------------------------------------------------------------------------//    
     //componentDidMount is the best method to send http request
     componentDidMount(){
@@ -69,6 +68,8 @@ class Posts extends Component {
         individually, one by one, and access their id, title, ect*/
          posts = this.state.posts.map(post => {
             return (
+//this entire post will serve as an anchor tag, meaning clicking on it will redirect you        
+                //"to" will take you to the path of the id, meaning it passes the value to the end
             <Link to={'/' + post.id} key={post.id} >
             <Post 
                     title={post.title}

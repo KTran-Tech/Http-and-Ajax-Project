@@ -12,20 +12,21 @@ class FullPost extends Component {
     }
 
 //--------------------------------------------------------------------//
-    //componentDidUpdate is best method to update http request data
-    componentDidUpdate() {
-        if(this.props.id){
+    //componentDidUpdate/Mount is best method to update http request data
+    componentDidMount() {
+        //"params" means "parameters" passed through 
+        if(this.props.match.params.id){
             /*if the current state has data and its id is not the same
             as the props.id, then update*/
-            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)){
+            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)){
 
             /* specifying which object to grab from an array and output
-            ONLY that object by adding the props.id at the end*/
-            axios.get('/posts/'+this.props.id)
-            .then(response => {
-            /*Because of the id specification from the .get(), you go
-            from this,
-            Object { data:[…,100]} -------> Object { data: {…} }*/
+            ONLY that object by adding the params at the end*/
+            axios.get('/posts/'+this.props.match.params.id)
+                .then(response => {
+                /*Because of the id specification from the .get(), you go
+                from this,
+                Object { data:[…,100]} -------> Object { data: {…} }*/
                 this.setState({loadedPost: response.data});
             }) 
 
@@ -36,7 +37,7 @@ class FullPost extends Component {
 
     deletePostHandler = () => {
         //delete an object with that specific id
-        axios.delete('/posts/'+this.props.id)
+        axios.delete('/posts/'+this.props.match.params.id)
             .then(response => {
                 console.log(response);
             })
@@ -47,7 +48,7 @@ class FullPost extends Component {
     render () {
         let post = <p style={{textAlign:'center'}}>Please select a Post!</p>;
         
-        if(this.props.id){
+        if(this.props.match.params.id){
             post = <p style={{textAlign:'center'}}>Loading...!</p>;
         }
 
