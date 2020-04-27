@@ -19,6 +19,7 @@ class Posts extends Component {
     }
 //-------------------------------------------------------------------------------//    
     //componentDidMount is the best method to send http request
+    // invoked once (client-side only).
     componentDidMount(){
         //axios works WITH promises and .get() RETURNS a promise(an object with data)
     /* A promise may be in one of 3 possible states: fulfilled, rejected, or pending.*/
@@ -54,7 +55,7 @@ class Posts extends Component {
 
 
     postSelectedHandler = (id) => {
-    //changes the pathname to the id of the post clicked on    
+    //changes the pathname to the id of the post is clicked on    
         this.props.history.push({pathname: '/posts/' + id});
     }
     
