@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 import axios from '../../../axios'
 
+import {Route} from 'react-router-dom';
+
 import Post from '../../../components/Post/Post'
+
+import FullPost from '../FullPost/FullPost'
 
 import './Posts.css'
 
@@ -50,9 +54,8 @@ class Posts extends Component {
 
 
     postSelectedHandler = (id) => {
-        this.setState({
-            selectedPostId: id
-        });
+    //changes the pathname to the id of the post clicked on    
+        this.props.history.push({pathname: '/posts/' + id});
     }
     
 
@@ -69,15 +72,19 @@ class Posts extends Component {
          posts = this.state.posts.map(post => {
             return (
 //this entire post will serve as an anchor tag, meaning clicking on it will redirect you        
-                //"to" will take you to the path of the id, meaning it passes the value to the end
-            <Link to={'/' + post.id} key={post.id} >
+                //"to" will take you to the path name of the id, meaning it passes the value to the end
+            
+            // <Link to={'/posts/' + post.id} key={post.id} >
             <Post 
+                    key={post.id}
                     title={post.title}
                     author={post.author}
                     //everytime you pass an argument you use arrow function
                     clicked={() => this.postSelectedHandler(post.id)}
             />
-            </Link>)
+            // </Link>
+           
+            );
         });
         }
 
@@ -85,11 +92,17 @@ class Posts extends Component {
 //-------------------------------------------------------------------------------//    
 
         return(
-
-        <section className="Posts">
-            {posts}
-        </section>
-
+        <div>   
+            <section className="Posts">
+                {posts}
+            </section>
+ {/* Route will CREATE a NEW page after you click on the component {Posts} */}
+        {/* path will equal to whatever the paths name is when redirected by {Posts}
+        so its best to be careful as it can also be affected by changing it to {NewPost} */}
+            {/* in order for FullPost component to be displayed, the path has the be EXACT with the id */}
+    {/* ":id" is a flexible parameter that accepts a value in from {Post} and passes it into {FullPost}*/}            
+            <Route path={this.props.match.url + '/:id'} exact component={FullPost}/>
+        </div>     
         );
     }
 }

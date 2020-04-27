@@ -12,13 +12,24 @@ class FullPost extends Component {
     }
 
 //--------------------------------------------------------------------//
+
     //componentDidUpdate/Mount is best method to update http request data
+    //componentDidMount will execute one time, its add or remove
     componentDidMount() {
+        this.loadData();
+    }
+
+    //componentDidUpdate will be the method used to update changes over and over
+    componentDidUpdate(){
+        this.loadData();
+    }
+
+    loadData(){
         //"params" means "parameters" passed through 
         if(this.props.match.params.id){
             /*if the current state has data and its id is not the same
             as the props.id, then update*/
-            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)){
+            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id != this.props.match.params.id)){
 
             /* specifying which object to grab from an array and output
             ONLY that object by adding the params at the end*/
@@ -32,8 +43,9 @@ class FullPost extends Component {
 
 
             }
-        }
+        }        
     }
+
 
     deletePostHandler = () => {
         //delete an object with that specific id
