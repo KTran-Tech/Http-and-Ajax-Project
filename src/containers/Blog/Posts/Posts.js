@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import {Link} from 'react-router-dom'
+
 import axios from '../../../axios'
 
 import Post from '../../../components/Post/Post'
@@ -47,21 +49,16 @@ class Posts extends Component {
     }
 
 
-//-------------------------------------------------------------------------------//    
-
-
 
     postSelectedHandler = (id) => {
         this.setState({
             selectedPostId: id
         });
     }
-
-//-------------------------------------------------------------------------------//    
-
     
-    render () {
-//-------------------------------------------------------------------------------//    
+
+//-------------------------------------------------------------------------------//
+    render () {    
 
 
         let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>
@@ -71,13 +68,15 @@ class Posts extends Component {
         /*For every OBJECT that exist within this array, loop throuh them
         individually, one by one, and access their id, title, ect*/
          posts = this.state.posts.map(post => {
-            return <Post 
-                    key={post.id} 
+            return (
+            <Link to={'/' + post.id} key={post.id} >
+            <Post 
                     title={post.title}
                     author={post.author}
                     //everytime you pass an argument you use arrow function
                     clicked={() => this.postSelectedHandler(post.id)}
-                    />
+            />
+            </Link>)
         });
         }
 
