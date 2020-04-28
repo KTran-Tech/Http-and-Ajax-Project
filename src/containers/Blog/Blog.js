@@ -9,8 +9,10 @@ import './Blog.css';
 
 import Posts from './Posts/Posts';
 import asyncComponent from '../../hoc/asyncComponent'
-//import NewPost from './NewPost/NewPost'
 
+//import NewPost from './NewPost/NewPost'
+/* "()=>" is the function passed through as importComponent(), and 
+'./NewPost/NewPost' will be the component that set the state to its default component*/
 const AsyncNewPost = asyncComponent(()=> {
     return import('./NewPost/NewPost');
 });
@@ -44,8 +46,9 @@ class Blog extends Component {
 
 {/* by using the <Switch> wrapper, tells the path to only load one Route at a time */}
                 <Switch>
-
+    {/* when the page is redirected to "/new-post" {AsyncNewPost} will be invoked */}
                     {this.state.auth ? <Route path="/new-post" exact component={AsyncNewPost}/> : null }
+                    
                     <Route path="/posts" component={Posts}/>
 
 
