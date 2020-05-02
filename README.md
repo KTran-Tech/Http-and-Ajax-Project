@@ -1,3 +1,7 @@
+## Purpose 
+
+The purpose of this project is to work with http and ajax request in order to have a better understanding of how to properly manipulate and display them onto the user interface.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
