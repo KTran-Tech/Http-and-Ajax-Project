@@ -48,7 +48,6 @@ class Posts extends Component {
             })
             .catch(error => {
                 console.log(error)
-                console.log("error")
             })
            
     }
